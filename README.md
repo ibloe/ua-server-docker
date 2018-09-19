@@ -42,9 +42,9 @@ Continue to use [Linux commands](https://www.raspberrypi.org/documentation/linux
 
 #### Tags
 
-* **ibloe/opc-ua:latest** - non-tagged latest development output of the GitHub project master branch.
+* **ibloe/ua-server-docker:latest** - non-tagged latest development output of the GitHub project master branch.
 
 #### GitHub sources
-The image is built from the GitHub project [OPC-UA](https://github.com/ibloe/OPC-UA). It complies with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build a Docker image [automated](https://docs.docker.com/docker-hub/builds/).
+The image is built from the GitHub project [ua-server-docker](https://github.com/ibloe/ua-server-docker). It complies with the [Dockerfile](https://docs.docker.com/engine/reference/builder/) method to build a Docker image [automated](https://docs.docker.com/docker-hub/builds/).
 
 Hint: Cross-building the image for an ARM architecture based CPU on [Docker Hub](https://hub.docker.com/)(x86 CPU based servers) the Dockerfile uses the method described here [resin.io](https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/). If you want to build the image on a Raspberry Pi directly then comment out the two lines `RUN [ "cross-build-start" ]` and `RUN [ "cross-build-end" ]` in the file Dockerfile before.
