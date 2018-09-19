@@ -20,7 +20,7 @@ STEP 1. Open [Portainer.io](http://portainer.io/) Docker management user interfa
 
 STEP 2. Enter the following parameters under **Containers > Add Container**
 
-* **Image**: `ibloe/opc-ua`
+* **Image**: `ibloe/ua-server-docker`
 
 * **Network > Network**: `host`
 
