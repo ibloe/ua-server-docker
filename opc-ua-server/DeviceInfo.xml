@@ -1,0 +1,20 @@
+<!---Device Information--->
+<DeviceInformation>
+    <Description>HilscherSoftSPS</Description>
+    <Manufacturer>Hilscher</Manufacturer>
+    <Model>SSPS4000</Model>
+    <ProductId>H1062541</ProductId>
+    <SerialNumber>1</SerialNumber>
+</DeviceInformation>
+<ConnectionRequest0>
+    <Active>true</Active>
+    <DestinationAddress>5D:53:80:47:E0:22</DestinationAddress>
+    <ErrorCode>0</ErrorCode>
+    <SourceAddress>C2:D9:D8:53:B2:6F</SourceAddress>
+</ConnectionRequest0>
+<ConnectionRequest1>
+    <Active>true</Active>
+    <DestinationAddress>71:F4:31:4B:3A:80</DestinationAddress>
+    <ErrorCode>0</ErrorCode>
+    <SourceAddress>51:CB:5B:EE:3C:25</SourceAddress>
+</ConnectionRequest1>
