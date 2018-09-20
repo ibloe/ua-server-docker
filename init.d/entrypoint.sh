@@ -21,7 +21,7 @@ trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SI
 echo "starting ssh ..."
 sudo /etc/init.d/ssh start
 
-echo "starting TestCrossPi"
+echo "starting opc-ua-server"
 
 sudo ./home/pi/opc-ua-server/opc-ua-server
 
