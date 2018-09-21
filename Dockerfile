@@ -14,16 +14,12 @@ LABEL maintainer="ibloecher@hilscher.com" \
 
 #version
 ENV OPC_UA_VERSION 0.0.0.1
-
 #java options
 ENV _JAVA_OPTIONS -Xms64M -Xmx128m
 
 #Create directories and copy files with group rights for user id 1000 for read, write and execute
 RUN mkdir -p -m g=rwx /home/pi/opc-ua-server/
 
-
-COPY "./init.d/*" /etc/init.d/
-COPY "./opc-ua-server/" /home/pi/opc-ua-server/
 
 #install helper programs
 RUN apt-get update  \
@@ -70,6 +66,9 @@ RUN apt-get update  \
     && apt-get -yqq autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
+
+COPY ./init.d/ /etc/init.d/
+COPY ./opc-ua-server/ /home/pi/opc-ua-server/
 
 #Node-RED Port
 EXPOSE 1880
