@@ -3,12 +3,10 @@
 
 # SIGNAL-handler
 term_handler() {
-   echo "terminating node-red ..."
-   /etc/init.d/nodered.sh stop
-   
-   echo "terminating ssh ..."
-  sudo /etc/init.d/ssh stop
-  
+
+  echo "terminating ssh ..."
+  /etc/init.d/ssh stop
+
   exit 143; # 128 + 15 -- SIGTERM
 }
 
@@ -16,15 +14,21 @@ term_handler() {
 trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SIGHUP
 
 # run applications in the background
-/etc/init.d/nodered.sh start & 
-
 echo "starting ssh ..."
-sudo /etc/init.d/ssh start
+/etc/init.d/ssh start
+
+# create netx "cifx0" ethernet network interface 
+/opt/cifx/cifx0daemon
+
+#start the network-manager
+/etc/init.d/network-manager start
+
+#stop/start the networking
+/etc/init.d/networking stop
+/etc/init.d/networking start
 
 echo "starting opc-ua-server"
-
 sudo ./home/pi/opc-ua-server/opc-ua-server
-
 
 # wait forever not to exit the container
 while true

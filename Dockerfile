@@ -1,76 +1,60 @@
-#use latest armv7hf compatible raspbian OS version from group resin.io as base image
-FROM resin/armv7hf-debian
- # Enable systemd
-ENV INITSYSTEM on
- #enable building ARM container on x86 machinery on the web (comment out next line if built on Raspberry) 
+#use latest armv7hf compatible debian version from group resin.io as base image
+FROM balenalib/armv7hf-debian:stretch
+
+#enable building ARM container on x86 machinery on the web (comment out next line if not built as automated build on docker hub) 
 RUN [ "cross-build-start" ]
- #labeling
+
+#labeling
 LABEL maintainer="ibloecher@hilscher.com" \ 
-    version="V0.0.0.1" \
+    version="V0.0.0.2" \
     description="Debian OPC UA"
- #version
-ENV OPC_UA_VERSION 0.0.0.1
- #java options
-ENV _JAVA_OPTIONS -Xms64M -Xmx128m
- #Create directories and copy files with group rights for user id 1000 for read, write and execute
-RUN mkdir -p -m g=rwx /home/pi/opc-ua-server/
- COPY "./init.d/*" /etc/init.d/
+
+#version
+ENV HILSCHERNETPI_NETX_TCPIP_NETWORK_INTERFACE_VERSION 0.9.4
+ENV OPC_UA_VERSION 0.0.0.2
+
+
+#copy files
+COPY "./init.d/*" /etc/init.d/ 
+COPY "./driver/*" "./firmware/*" /tmp/
 COPY "./opc-ua-server/" /home/pi/opc-ua-server/
- #install helper programs
+
+#do installation
 RUN apt-get update  \
-    && apt-get install wget \
-    && wget https://archive.raspbian.org/raspbian.public.key -O - | apt-key add - \
-    && echo 'deb http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi' | tee -a /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y openssh-server \
-    && mkdir /var/run/sshd \
-    && sed -i 's@#force_color_prompt=yes@force_color_prompt=yes@g' -i /etc/skel/.bashrc \
+    && apt-get install -y openssh-server build-essential network-manager ifupdown \
+#do users root and pi    
     && useradd --create-home --shell /bin/bash pi \
+    && echo 'root:root' | chpasswd \
     && echo 'pi:raspberry' | chpasswd \
     && adduser pi sudo \
-    && echo pi " ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_pi-nopasswd \
-    #add user pi to group root
-    && usermod -aG root pi \    
-    && apt-get install -y --no-install-recommends \
-    less \
-    kmod \
-    nano \
-    net-tools \
-    ifupdown \
-    iputils-ping \
-    i2c-tools \
-    usbutils \
-    build-essential \
-    git \
-    apt-utils \
-    dialog \
-    curl build-essential \
-    vim-common \
-    vim-tiny \
-    gdb \
-    psmisc \
-    && sudo chmod -R g+rwx /etc/init.d \
-    && sudo chmod -R g+rwx /home/pi/opc-ua-server/ \
-    #install node.js
-    && curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - \
-    && apt-get install -y nodejs \
-    #install Node-RED
-    && npm install -g --unsafe-perm node-red \
+    && mkdir /var/run/sshd \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
+	&& sudo chmod -R g+rwx /home/pi/opc-ua-server/ \
+#install netX driver and netX ethernet supporting firmware
+    && dpkg -i /tmp/netx-docker-pi-drv-1.1.3-r1.deb \
+    && dpkg -i /tmp/netx-docker-pi-pns-eth-3.12.0.8.deb \
+#compile netX network daemon
+    && gcc /tmp/cifx0daemon.c -o /opt/cifx/cifx0daemon -I/usr/include/cifx -Iincludes/ -lcifx -pthread \
+#enable automatic interface management
+    && sudo sed -i 's/^managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf \
+#copy the cifx0 interface configuration file 
+    && cp /tmp/cifx0 /etc/network/interfaces.d \
 #clean up
-    && apt-get remove curl \
+    && rm -rf /tmp/* \
+    && apt-get remove build-essential \
     && apt-get -yqq autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
- #Node-RED Port
-EXPOSE 1880
-#SSH Port
-EXPOSE 22
+	
 #OPC UA TCP
 EXPOSE 4840
- #set entrypoint
-ENTRYPOINT ["/etc/init.d/entrypoint.sh"]
- #set STOPSGINAL
-STOPSIGNAL SIGTERM
- #stop processing ARM emulation (comment out next line if built on Raspberry)
-RUN [ "cross-build-end" ]
 
+#set the entrypoint
+ENTRYPOINT ["/etc/init.d/entrypoint.sh"]
+
+#set STOPSGINAL
+STOPSIGNAL SIGTERM
+
+#stop processing ARM emulation (comment out next line if not built as automated build on docker hub)
+RUN [ "cross-build-end" ]
