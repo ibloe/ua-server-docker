@@ -31,6 +31,24 @@ RUN apt-get update  \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
 	&& sudo chmod -R g+rwx /home/pi/opc-ua-server/ \
+	&& apt-get install -y --no-install-recommends \
+    less \
+    kmod \
+    nano \
+    net-tools \
+    ifupdown \
+    iputils-ping \
+    i2c-tools \
+    usbutils \
+    build-essential \
+    git \
+    apt-utils \
+    dialog \
+    curl build-essential \
+    vim-common \
+    vim-tiny \
+    gdb \
+	psmisc \
 #install netX driver and netX ethernet supporting firmware
     && dpkg -i /tmp/netx-docker-pi-drv-1.1.3-r1.deb \
     && dpkg -i /tmp/netx-docker-pi-pns-eth-3.12.0.8.deb \
