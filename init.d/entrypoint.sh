@@ -18,7 +18,7 @@ echo "starting ssh ..."
 /etc/init.d/ssh start
 
 # create netx "cifx0" ethernet network interface 
-/opt/cifx/cifx0daemon
+#/opt/cifx/cifx0daemon
 
 #start the network-manager
 /etc/init.d/network-manager start

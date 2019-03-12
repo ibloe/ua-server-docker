@@ -65,8 +65,9 @@ RUN apt-get update  \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 	
-#OPC UA TCP
+#OPC UA TCP & SSH
 EXPOSE 4840
+EXPOSE 22
 
 #set the entrypoint
 ENTRYPOINT ["/etc/init.d/entrypoint.sh"]

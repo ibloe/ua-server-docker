@@ -2,28 +2,15 @@
 
 Base of this image builds a tagged version of [debian:stretch](https://hub.docker.com/r/resin/armv7hf-debian/tags/) with enabled [SSH](https://en.wikipedia.org/wiki/Secure_Shell), created user 'pi' and preinstalled packages of a headless Raspbian lite.
 
-#### Container prerequisites
-
-##### Port mapping
-
-For remote login to the container across SSH the container's SSH port `22` needs to be mapped to any free host port.
-`4840` for OPC-UA
-
-##### Hostname 
-
-A Raspberry Pi has the default hostname `raspberrypi`. For equal conditions set the container's hostname to the same string.
-
 #### Getting started
 
 STEP 1. Open [Portainer.io](http://portainer.io/) Docker management user interface.
 
 STEP 2. Enter the following parameters under **Containers > Add Container**
 
-* **Image**: `ibloe/ua-server-docker`
+* **Image**: `ibloe/ua-server-docker:latest`
 
 * **Network > Network**: `host`
-
-* **Port mapping**: `Host "22, 4840" (any unused one) -> Container "22, 4840"` 
 
 * **Restart policy** : `always`
 
