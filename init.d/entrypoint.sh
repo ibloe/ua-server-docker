@@ -28,7 +28,7 @@ echo "starting ssh ..."
 /etc/init.d/networking start
 
 #enable multicast for static ip configuration
-/sbin/ifconfig etho multicast
+/sbin/ifconfig eth0 multicast
 /sbin/route -n add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
 
 echo "starting opc-ua-server"
