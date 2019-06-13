@@ -63,6 +63,8 @@
 	<!---UserToNetworkRequirements--->	 
 	<MaxLatency>50000002</MaxLatency> <!---UINT32 --->
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
+	<!---PubSub PublishingInterval--->
+	<PublishingInterval>500</PublishingInterval>
 </Talker0>
 <Talker1>
 	<!---DataFrameSpecification/IPv4Touple--->	
@@ -87,6 +89,8 @@
 	<!---UserToNetworkRequirements--->	 
 	<MaxLatency>50000002</MaxLatency> <!---UINT32 --->
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
+	<!---PubSub PublishingInterval--->
+	<PublishingInterval>500</PublishingInterval>
 </Talker1>
 <Talker2>
 	<!---DataFrameSpecification/IPv4Touple--->	
@@ -111,6 +115,8 @@
 	<!---UserToNetworkRequirements--->	 
 	<MaxLatency>50000002</MaxLatency> <!---UINT32 --->
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
+	<!---PubSub PublishingInterval--->
+	<PublishingInterval>500</PublishingInterval>
 </Talker2>
 
 
