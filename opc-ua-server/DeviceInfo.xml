@@ -1,3 +1,12 @@
+<!---Serveroptions--->
+<ServerOptions>
+	<!---PubSub over Layer 2 Ethernet, if set to 0 Pub Sub is Layer 3 IP--->
+    <PubSubEthernet>1</PubSubEthernet>
+	<!---PubSub PublishingInterval--->
+	<PublishingInterval>1000.0</PublishingInterval>
+	<!---TTL for PubSub Messages--->
+	<TTL>3</TTL>
+</ServerOptions>
 <!---Device Information--->
 <DeviceInformation>
     <Description>OPCUA-Demoserver</Description>
@@ -63,10 +72,6 @@
 	<!---UserToNetworkRequirements--->	 
 	<MaxLatency>50000002</MaxLatency> <!---UINT32 --->
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
-	<!---PubSub PublishingInterval--->
-	<PublishingInterval>500</PublishingInterval>
-	<!---TTL--->
-	<TTL>3</TTL>
 </Talker0>
 <Talker1>
 	<!---DataFrameSpecification/IPv4Touple--->	
