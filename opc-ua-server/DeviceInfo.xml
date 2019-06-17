@@ -65,6 +65,8 @@
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
 	<!---PubSub PublishingInterval--->
 	<PublishingInterval>500</PublishingInterval>
+	<!---TTL--->
+	<TTL>3</TTL>
 </Talker0>
 <Talker1>
 	<!---DataFrameSpecification/IPv4Touple--->	
@@ -91,6 +93,8 @@
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
 	<!---PubSub PublishingInterval--->
 	<PublishingInterval>500</PublishingInterval>
+	<!---TTL--->
+	<TTL>3</TTL>
 </Talker1>
 <Talker2>
 	<!---DataFrameSpecification/IPv4Touple--->	
@@ -117,6 +121,8 @@
 	<NumSeamlessTrees>0</NumSeamlessTrees> <!---Byte --->
 	<!---PubSub PublishingInterval--->
 	<PublishingInterval>500</PublishingInterval>
+	<!---TTL--->
+	<TTL>3</TTL>
 </Talker2>
 
 
