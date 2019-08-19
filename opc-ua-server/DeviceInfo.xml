@@ -1,11 +1,13 @@
 <!---Serveroptions--->
 <ServerOptions>
 	<!---PubSub over Layer 2 Ethernet, if set to 0 Pub Sub is Layer 3 IP--->
-    <PubSubEthernet>0</PubSubEthernet>
+    <PubSubEthernet>1</PubSubEthernet>
 	<!---PubSub PublishingInterval--->
-	<PublishingInterval>100.0</PublishingInterval>
+	<PublishingInterval>1000.0</PublishingInterval>
 	<!---TTL for PubSub Messages--->
 	<TTL>3</TTL>
+	<!---Enable VL6180X Time of flight Service--->
+	<TofSensor>0</TofSensor>
 </ServerOptions>
 <!---Device Information--->
 <DeviceInformation>
